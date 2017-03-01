@@ -81,6 +81,37 @@ class ListaDoble(object):
 			self.__cola.pSig = None
 		self.__tamanio -= 1
 	
+	def setOrdenado(self, dato):
+		nuevo = n.Nodo(dato)
+		if self.getVacio() == True : 
+			self.__cabeza = self.__cola = nuevo	
+		else : 
+			aux = self.__cabeza
+			c = ord(dato[0])
+			validar = True
+			while (validar) :
+				if aux == self._cola and ord(aux.getElemento()[0]) < c:
+					validar = False
+				else:
+					aux = aux.pSig
+
+			if aux.pSig == None and ord(aux.getElemento()[0]) < c :
+				self.__cola.pSig = nuevo
+				nuevo.pAnt = self.__cola
+				self._cola = nuevo
+			else :
+				nodoanterior = aux.pAnt
+				nuevo.pAnt = nodoanterior
+				nodoanterior.pSig = nuevo
+				nuevo.pSig = aux
+				if aux == self.__cabeza and self.__cabeza.getElemento() > c:
+					inicio = nuevo
+
+
+
+
+
+
 	def getTamanio(self):
 		return self.__tamanio
 
@@ -106,7 +137,7 @@ class ListaDoble(object):
 						nodotemporal = nodoactual.pSig
 						nodoanterior.pSig = nodoactual.pSig
 						nodotemporal.pAnt = nodoanterior
-		self.__tamanio -= 1
+			self.__tamanio -= 1
 				 
 
 
