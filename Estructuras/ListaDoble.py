@@ -31,7 +31,7 @@ class ListaDoble(object):
 
 		self.__tamanio += 1 #tamanio de la lista 
 
-	def setNodoUltimo(sel ,dato):
+	def setNodoUltimo(self,dato):
 		nuevo = n.Nodo(dato)
 		if self.getVacio() == True : 
 			self.__cabeza = self.__cola = nuevo
@@ -89,29 +89,52 @@ class ListaDoble(object):
 			aux = self.__cabeza
 			c = ord(dato[0])
 			validar = True
-			while (validar) :
-				if aux == self._cola and ord(aux.getElemento()[0]) < c:
-					validar = False
-				else:
-					aux = aux.pSig
+			i = 0
 
-			if aux.pSig == None and ord(aux.getElemento()[0]) < c :
-				self.__cola.pSig = nuevo
-				nuevo.pAnt = self.__cola
-				self._cola = nuevo
+			while aux != self.__cola and ord(aux.getElemento()[i]) < c :
+				aux = aux.pSig
+
+			if aux == self.__cola and ord(aux.getElemento()[i]) < c :
+				self.setNodoUltimo(dato)
 			else :
-				nodoanterior = aux.pAnt
-				nuevo.pAnt = nodoanterior
-				nodoanterior.pSig = nuevo
-				nuevo.pSig = aux
-				if aux == self.__cabeza and self.__cabeza.getElemento() > c:
-					inicio = nuevo
+				if aux == self.__cabeza:
+					self.setNodoPrimero(dato)
+				elif ord(aux.getElemento()[i]) == c :
+					print "hola el elemento es igual :v"
+					for caracter in dato:
+						if caracter != aux.getElemento()[i]:
+							c = ord(caracter)
+							break
+						else:
+							i += 1
 
+					if aux == self.__cola and ord(aux.getElemento()[i]) < c:
+						self.setNodoUltimo(dato)
+					else : 
+						if aux == self.__cabeza:
+							self.setNodoPrimero(dato)
 
+					#if  ord(aux.getElemento()[i]) < c :
+					#	nodosiguiente = aux.pSig
+					#	nodosiguiente.pAnt = nuevo
+					#	nuevo.pSig = nodosiguiente
+					#	nuevo.pAnt = aux
+					#	aux.pSig = nuevo
+						else:
 
+							nodoanterior = aux.pAnt
+							nodoanterior.pSig = nuevo
+							nuevo.pAnt = nodoanterior
+							nuevo.pSig = aux
+							aux.pAnt = nuevo						
+				else:
+					nodoanterior = aux.pAnt
+					nodoanterior.pSig = nuevo
+					nuevo.pAnt = nodoanterior
+					nuevo.pSig = aux
+					aux.pAnt = nuevo
 
-
-
+	
 	def getTamanio(self):
 		return self.__tamanio
 
