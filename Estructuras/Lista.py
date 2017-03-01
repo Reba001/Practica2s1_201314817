@@ -9,6 +9,7 @@ class Lista(object):
 
 		self.__primero = None
 		self.__ultimo = None
+		self.__tamanio = 0
 
 
 	def getVacio(self):
@@ -23,6 +24,7 @@ class Lista(object):
 		else : 
 			nuevo.pSig = self.__primero
 			self.__primero = nuevo
+		self.__tamanio += 1
 
 
 	def setNodoFinal(self, elemento) : 
@@ -32,6 +34,7 @@ class Lista(object):
 		else : 
 			self.__ultimo.pSig = nuevo
 			self.__ultimo = nuevo
+		self.__tamanio += 1
 
 	def eliminarPrimero(self) : 
 		if self.getVacio() == True : 
@@ -43,6 +46,8 @@ class Lista(object):
 		else : 
 			temp = self.__primero
 			self.__primero = self.__primero.pSig
+
+		self.__tamanio -= 1	
 
 	def eliminarUltimo(self) : 
 		if self.getVacio()==True:
@@ -63,6 +68,7 @@ class Lista(object):
 					print "Elemento eliminado "
 				else : 
 					temp = temp.pSig
+		self.__tamanio -= 1
 
 	def getNodoPrimero(self) : 
 		if self.getVacio() == True:
@@ -76,6 +82,27 @@ class Lista(object):
 			return "Lista Vacia"
 		else : 
 			return self.__ultimo
+
+	def eliminarPorPosicion(self, posicion):
+		if self.getVacio() == True:
+			print "Imposible eliminar la lista esta vacia"
+		else:
+			if posicion == 0 :
+				self.eliminarPrimero()
+			elif posicion == (self.__tamanio - 1) :
+				self.eliminarUltimo()
+			else:
+				k = 0
+				nodoactual = nodoanterior  = self.__primero
+				while k != posicion and nodotemporal.pSig != None:
+					nodoanterior = nodoactual
+					nodoactual= nodoactual.pSig
+					k += 1
+				if k == posicion : 
+					nodotemporal = nodoactual.pSig
+					nodoanterior.pSig = nodotemporal.pSig
+		self.__tamanio -= 1
+
 
 	def imprimirListaCompleta(self) : 
 		if self.getVacio() == True :

@@ -7,9 +7,17 @@ class ListaDoble(object):
 		self.__cola = None
 		self.__tamanio = 0
 
+	def getCabeza (self):
+		return self.__cabeza
+
+	def getCola(self) : 
+		return self.__cola	
+
 	def getVacio(self):
 		if self.__cabeza == None :
 			return True
+		else : 
+			return False
 
 
 	def setNodoPrimero(self, dato):
@@ -22,6 +30,17 @@ class ListaDoble(object):
 			self.__cabeza = nuevo
 
 		self.__tamanio += 1 #tamanio de la lista 
+
+	def setNodoUltimo(sel ,dato):
+		nuevo = n.Nodo(dato)
+		if self.getVacio() == True : 
+			self.__cabeza = self.__cola = nuevo
+		else:
+			self.__cola.pSig = nuevo
+			nuevo.pAnt = self.__cola
+			self.__cola = nuevo
+
+		self.__tamanio += 1
 
 	def getLista(self):
 		if self.getVacio() == True :
@@ -47,6 +66,8 @@ class ListaDoble(object):
 		else : 
 			self.__cabeza = self.__cabeza.pSig
 			self.__cabeza.pAnt = None
+		self.__tamanio -= 1
+
 
 	def eliminarUltimo(self):
 		if self.getVacio() == True :
@@ -58,6 +79,7 @@ class ListaDoble(object):
 		else : 
 			self.__cola = self.__cola.pAnt
 			self.__cola.pSig = None
+		self.__tamanio -= 1
 	
 	def getTamanio(self):
 		return self.__tamanio
@@ -75,7 +97,7 @@ class ListaDoble(object):
 				nodoactual = self.__cabeza
 				nodoanterior= self.__cabeza
 				k=0
-				if posicion >= 0 :
+				if posicion > 0 :
 					while k != posicion and nodoactual.pSig != None :
 						nodoanterior = nodoactual
 						nodoactual = nodoactual.pSig
@@ -84,6 +106,7 @@ class ListaDoble(object):
 						nodotemporal = nodoactual.pSig
 						nodoanterior.pSig = nodoactual.pSig
 						nodotemporal.pAnt = nodoanterior
+		self.__tamanio -= 1
 				 
 
 
