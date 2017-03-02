@@ -3,6 +3,11 @@ from Nodo import Nodo
 
 class MatrizD : 
 	def __init__(self):
+		self.__nodoMDCabezaY = None
+		self.__nodoMDColaY = None
+		self.__nodoMDColaX = None
+		self.__nodoMDCabezaY = None
+
 		self.__X = ListaDoble()  #Representa columna (los dominios)
 		self.__Y = ListaDoble() #Representa Fila (la inicial de cada nombre)
 		self.__Z = ListaDoble()	#Representa Largo (todos los nombres en cada dominio) 
@@ -13,24 +18,56 @@ class MatrizD :
 
 	
 	def setDatos(self, datoX, datoY, datoZ) :
-
-		if self.__X.getVacio() == True:
-		 	self.__X.setNodoPrimero(datoX)
-			self.__Y.setNodoPrimero(datoY)
-			self.__Z.setNodoPrimero(datoZ)
-		else :
-			self.ordenarX(datoX)
-			self.ordenarY(datoY)
-			self.ordenarZ(datoZ)
-
-	def ordenarX(self, datoX):
-
-
-	def ordenarY(self, datoY):
-
-
-	def ordenarZ(self, datoZ):
+		nodoDisperso = Nodo(datoZ)# nodo disperso que se hizo para guardar el nodo que ha de apuntar hacia arriba , abajo, siguiente y anterior 
 		
+		
+		if self.__X.busquedaPorDato(datoX) != True:
+			print "Dato no se encuentra dentro de la matriz"
+			self.__X.setOrdenado(datoX)
+		
+		if self.__Y.busquedaPorDato(datoY) != True:
+			print "Dato ya se encuentra dentro de la matriz"
+			self.__Y.setOrdenado(datoY)
+		
+		if self.__Y.busquedaPorDato(datoY) == True : # busqueda de la primer letra del nombre del correo
+			nodoCY = self.__Y.busquedadeNodo(datoY)
+			if nodoCY.pAb == None : 
+				nodoCY.pAb = nodoDisperso
+				nodoDisperso.pAnt = nodoCY
+			else :
+				nodoCabezaD = nodoCY.pAb
+				nodoCabezaD.pSig = nodoDisperso
+				nodoDisperso.pAnt = nodoCabezaD 
+
+		
+
+		if self.__X.busquedaPorDato(datoX) == True : 
+			nodoCX = self.__X.getCabeza()
+
+
+
+
+
+		
+		
+
+
+
+
+
+
+
+
+
+	def crearMatriz(self):# metodo para crear una matriz dispersa 
+		
+				
+
+
+
+
+
+
 
 
 

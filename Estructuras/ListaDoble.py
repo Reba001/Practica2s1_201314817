@@ -13,6 +13,12 @@ class ListaDoble(object):
 	def getCola(self) : 
 		return self.__cola	
 
+	def setCabeza(self, cabeza):
+		self.__cabeza = cabeza
+
+	def setCola(self, cola):
+		self.__cola	= cola
+
 	def getVacio(self):
 		if self.__cabeza == None :
 			return True
@@ -161,7 +167,25 @@ class ListaDoble(object):
 						nodoanterior.pSig = nodoactual.pSig
 						nodotemporal.pAnt = nodoanterior
 			self.__tamanio -= 1
-				 
+
+	def busquedaPorDato(self, dato):
+		nodotemporal = self.getCabeza()
+		while nodotemporal != self.getCola() and nodotemporal.getElemento() != dato :
+			nodotemporal = nodotemporal.pSig
+
+		return True
+
+	def busquedadeNodo(self, dato):
+		nodotemporal = self.getCabeza()
+		encontrado = False
+
+		while nodotemporal != None and encontrado != True : 
+			if dato == nodotemporal.getElemento() : 
+				encontrado = True
+			else : 
+				nodotemporal = nodotemporal.pSig
+
+		return nodotemporal
 
 
 
