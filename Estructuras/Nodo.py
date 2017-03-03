@@ -9,7 +9,9 @@ class Nodo(object):
 		self.__pAb = None
 		self.__pArr = None
  
-
+	def actualizarElemento(self, elemento) : 
+		self.__elemento = elemento
+		
 	def getElemento(self):
 		return self.__elemento
 

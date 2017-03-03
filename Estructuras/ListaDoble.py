@@ -1,6 +1,6 @@
 import Nodo
 n = Nodo
-
+nodoVacio = Nodo
 class ListaDoble(object):
 	def __init__(self):
 		self.__cabeza = None
@@ -27,9 +27,13 @@ class ListaDoble(object):
 
 
 	def setNodoPrimero(self, dato):
+		nv = nodoVacio.Nodo("")
 		nuevo = n.Nodo(dato)
+		nuevo.pAb = nv 
+		nuevo.pArr = nv
 		if self.getVacio() == True:
 			self.__cabeza = self.__cola = nuevo
+
 		else : 
 			nuevo.pSig = self.__cabeza
 			self.__cabeza.pAnt = nuevo
@@ -38,21 +42,25 @@ class ListaDoble(object):
 		self.__tamanio += 1 #tamanio de la lista 
 
 	def setNodoUltimo(self,dato):
+		nv = nodoVacio.Nodo("")
 		nuevo = n.Nodo(dato)
+		nuevo.pAb = nv
+		nuevo.pArr = nv
 		if self.getVacio() == True : 
 			self.__cabeza = self.__cola = nuevo
 		else:
 			self.__cola.pSig = nuevo
 			nuevo.pAnt = self.__cola
 			self.__cola = nuevo
+			
 
 		self.__tamanio += 1
 
 	def getLista(self):
 		if self.getVacio() == True :
-			print "Lista Vacia"
+			print "Lista Vacia no se porque entra de ultimo"
 		else : 
-			print "------------------------------"
+			#print "------------------------------"
 			validar = True 
 			temp = self.__cabeza
 			while (validar) : 
@@ -88,9 +96,13 @@ class ListaDoble(object):
 		self.__tamanio -= 1
 	
 	def setOrdenado(self, dato):
+		nv = nodoVacio.Nodo("")
 		nuevo = n.Nodo(dato)
+		nuevo.pArr = nv
+		nuevo.pAb = nv
 		if self.getVacio() == True : 
-			self.__cabeza = self.__cola = nuevo	
+			self.__cabeza = self.__cola = nuevo 
+			self.__cola.pSig = nv	
 		else : 
 			aux = self.__cabeza
 			c = ord(dato[0])
@@ -104,35 +116,7 @@ class ListaDoble(object):
 				self.setNodoUltimo(dato)
 			else :
 				if aux == self.__cabeza:
-					self.setNodoPrimero(dato)
-				elif ord(aux.getElemento()[i]) == c :
-					print "hola el elemento es igual :v"
-					for caracter in dato:
-						if caracter != aux.getElemento()[i]:
-							c = ord(caracter)
-							break
-						else:
-							i += 1
-
-					if aux == self.__cola and ord(aux.getElemento()[i]) < c:
-						self.setNodoUltimo(dato)
-					else : 
-						if aux == self.__cabeza:
-							self.setNodoPrimero(dato)
-
-					#if  ord(aux.getElemento()[i]) < c :
-					#	nodosiguiente = aux.pSig
-					#	nodosiguiente.pAnt = nuevo
-					#	nuevo.pSig = nodosiguiente
-					#	nuevo.pAnt = aux
-					#	aux.pSig = nuevo
-						else:
-
-							nodoanterior = aux.pAnt
-							nodoanterior.pSig = nuevo
-							nuevo.pAnt = nodoanterior
-							nuevo.pSig = aux
-							aux.pAnt = nuevo						
+					self.setNodoPrimero(dato)						
 				else:
 					nodoanterior = aux.pAnt
 					nodoanterior.pSig = nuevo
@@ -169,23 +153,46 @@ class ListaDoble(object):
 			self.__tamanio -= 1
 
 	def busquedaPorDato(self, dato):
-		nodotemporal = self.getCabeza()
-		while nodotemporal != self.getCola() and nodotemporal.getElemento() != dato :
-			nodotemporal = nodotemporal.pSig
+		encontrado = False
+		if self.getVacio() == True :
+			print "oie si que rukistrukis"
+		else : 
+			print "------------------------------"
+			validar = True 
+			temp = self.__cabeza
+			while (validar) : 
+				if temp.getElemento() == dato : 
+					validar = False
+					print temp.getElemento()
+					encontrado = True 
+				if temp == self.__cola : 
+					validar = False 
+				else : 
+					temp = temp.pSig
+		return encontrado
 
-		return True
+		
 
 	def busquedadeNodo(self, dato):
-		nodotemporal = self.getCabeza()
-		encontrado = False
+		temp = self.__cabeza
+		if self.getVacio() == True :
+			print "oie si que rukistrukis"
+		else : 
+			print "------------------------------"
+			
+			while temp != None :
 
-		while nodotemporal != None and encontrado != True : 
-			if dato == nodotemporal.getElemento() : 
-				encontrado = True
-			else : 
-				nodotemporal = nodotemporal.pSig
+				if temp.getElemento() == dato :
+					print "awebo nodo encontrado prro alv" , temp.getElemento()
+					if temp != self.__cola :
+						print "awebo nodo puntero siguiente", temp.pSig.getElemento()
+					else: 
+						print "llegaste al ultimo nodo prro"
+					break
 
-		return nodotemporal
+				temp = temp.pSig
+		
+		return temp
 
 
 
