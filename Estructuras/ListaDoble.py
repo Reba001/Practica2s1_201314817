@@ -3,6 +3,7 @@ n = Nodo
 nodoVacio = Nodo
 class ListaDoble(object):
 	def __init__(self):
+		
 		self.__cabeza = None
 		self.__cola = None
 		self.__tamanio = 0
@@ -24,6 +25,7 @@ class ListaDoble(object):
 			return True
 		else : 
 			return False
+	
 
 
 	def setNodoPrimero(self, dato):
@@ -52,7 +54,7 @@ class ListaDoble(object):
 			self.__cola.pSig = nuevo
 			nuevo.pAnt = self.__cola
 			self.__cola = nuevo
-			
+
 
 		self.__tamanio += 1
 
@@ -102,7 +104,8 @@ class ListaDoble(object):
 		nuevo.pAb = nv
 		if self.getVacio() == True : 
 			self.__cabeza = self.__cola = nuevo 
-			self.__cola.pSig = nv	
+			self.__cola.pSig = nv
+			self.__tamanio += 1	
 		else : 
 			aux = self.__cabeza
 			c = ord(dato[0])
@@ -123,6 +126,8 @@ class ListaDoble(object):
 					nuevo.pAnt = nodoanterior
 					nuevo.pSig = aux
 					aux.pAnt = nuevo
+					self.__tamanio += 1
+
 
 	
 	def getTamanio(self):
@@ -152,18 +157,42 @@ class ListaDoble(object):
 						nodotemporal.pAnt = nodoanterior
 			self.__tamanio -= 1
 
+	def buscarPorPosicion(self,posicion):
+		temp = self.__cabeza
+		if self.getVacio() == True : 
+			print "Imposible eliminar esta vacio"
+		
+		else :
+			validar = True
+			contador = 0
+			
+			if posicion > 0 :
+				while validar :
+					if posicion == contador:
+						validar = False
+						break
+					
+					if temp == self.__cola:
+						validar = False
+					else:
+						contador += 1
+						temp = temp.pSig
+		return temp
+			
+
+
 	def busquedaPorDato(self, dato):
 		encontrado = False
 		if self.getVacio() == True :
 			print "oie si que rukistrukis"
 		else : 
-			print "------------------------------"
+			#print "------------------------------"
 			validar = True 
 			temp = self.__cabeza
 			while (validar) : 
 				if temp.getElemento() == dato : 
 					validar = False
-					print temp.getElemento()
+			#		print temp.getElemento()
 					encontrado = True 
 				if temp == self.__cola : 
 					validar = False 
@@ -178,16 +207,16 @@ class ListaDoble(object):
 		if self.getVacio() == True :
 			print "oie si que rukistrukis"
 		else : 
-			print "------------------------------"
+			#print "------------------------------"
 			
 			while temp != None :
 
 				if temp.getElemento() == dato :
-					print "awebo nodo encontrado prro alv" , temp.getElemento()
-					if temp != self.__cola :
-						print "awebo nodo puntero siguiente", temp.pSig.getElemento()
-					else: 
-						print "llegaste al ultimo nodo prro"
+				#	print "awebo nodo encontrado prro alv" , temp.getElemento()
+				#	if temp != self.__cola :
+				#		print "awebo nodo puntero siguiente", temp.pSig.getElemento()
+				#	else: 
+				#		print "llegaste al ultimo nodo prro"
 					break
 
 				temp = temp.pSig

@@ -1,0 +1,30 @@
+			aux = self.__cabeza
+			c = ord(dato[0])
+			validar = True
+			i = 0
+
+			while aux != self.__cola and ord(aux.getElemento()[i]) < c :
+				aux = aux.pSig
+
+			if aux == self.__cola and ord(aux.getElemento()[i]) < c :
+				self.setNodoUltimo(dato)
+			else :
+				if aux == self.__cabeza:
+					self.setNodoPrimero(dato)						
+				else:
+					nodoanterior = aux.pAnt
+					nodoanterior.pSig = nuevo
+					nuevo.pAnt = nodoanterior
+					nuevo.pSig = aux
+					aux.pAnt = nuevo
+					self.__tamanio += 1
+
+		
+				if contador == (nodoCX.getTamanioFila()-1):
+					vale = False
+				elif contador == 0 :
+					contador += 1
+					temp = temp.pAb
+				else:
+					contador += 1
+					temp = temp.pSig
